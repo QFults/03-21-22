@@ -24,6 +24,22 @@ app.post('/movies', (req, res) => {
   })
 })
 
+// PUT one movie
+app.put('/movies/:id', (req, res) => {
+  db.query('UPDATE movies SET ? WHERE ?', [req.body, { id: req.params.id }], err => {
+    if (err) { console.log(err) }
+    res.sendStatus(200)
+  })
+})
+
+// DELETE one movie
+app.delete('/movies/:id', (req, res) => {
+  db.query('DELETE FROM movies WHERE ?', { id: req.params.id }, err => {
+    if (err) { console.log(err) }
+    res.sendStatus(200)
+  })
+})
+
 app.listen(3000)
 
 // const db = mysql.createConnection({
