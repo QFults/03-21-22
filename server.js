@@ -3,54 +3,9 @@ const mysql = require('mysql2')
 
 const app = express()
 
-const db = mysql.createConnection('mysql://root:rootroot@localhost:3306/favorites_db')
-
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// GET all movies
-app.get('/movies', (req, res) => {
-  db.query('SELECT * FROM movies', (err, movies) => {
-    if (err) { console.log(err) }
-    res.json(movies)
-  })
-})
-
-// POST one movie
-app.post('/movies', (req, res) => {
-  db.query('INSERT INTO movies SET ?', req.body, err => {
-    if (err) { console.log(err) }
-    res.sendStatus(200)
-  })
-})
-
-// PUT one movie
-app.put('/movies/:id', (req, res) => {
-  db.query('UPDATE movies SET ? WHERE ?', [req.body, { id: req.params.id }], err => {
-    if (err) { console.log(err) }
-    res.sendStatus(200)
-  })
-})
-
-// DELETE one movie
-app.delete('/movies/:id', (req, res) => {
-  db.query('DELETE FROM movies WHERE ?', { id: req.params.id }, err => {
-    if (err) { console.log(err) }
-    res.sendStatus(200)
-  })
-})
+app.use(require('./routes'))
 
 app.listen(3000)
-
-// const db = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'rootroot',
-//   database: 'favorites_db'
-// })
-
-
-// db.query('SELECT * FROM movies', (err, data) => {
-//   if (err) { console.log(err) }
-//   console.log(data)
-// })
