@@ -14,3 +14,12 @@ VALUES ('Bear', 6, 'Cockapoo'), ('Beef', 2, 'Chihuahua');
 USE dogs_db;
 SELECT * FROM dogs
 WHERE name = 'Beef';
+
+USE dogs_db;
+UPDATE dogs
+SET age = 3
+WHERE name = 'Beef';
+
+USE dogs_db;
+DELETE FROM dogs
+WHERE name = 'Bear';
